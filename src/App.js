@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Header from "./components/Header";
 import Board from "./components/Board";
@@ -34,10 +34,10 @@ function App() {
                 <EmptyBoard type="add" />
               )
             ) : (
-              <Redirect to="/login" />
+              <Navigate to="/login" />
             )}
           </Route>
-          <Redirect to="/login" />
+          <Navigate to="/login" />
         </Routes>
       </div>
     </Router>
