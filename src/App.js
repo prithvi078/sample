@@ -1,11 +1,12 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import Header from "./components/Header";
-import Board from "./components/Board";
-import EmptyBoard from "./components/EmptyBoard";
+
+import Header from './components/Header';
+import Board from './components/Board';
+import EmptyBoard from './components/EmptyBoard';
 import Login from './pages/Login';
-import boardsSlice from "./redux/boardsSlice";
+import boardsSlice from './redux/boardsSlice';
 import './App.css';
 
 function App() {
@@ -19,28 +20,31 @@ function App() {
     dispatch(boardsSlice.actions.setBoardActive({ index: 0 }));
 
   return (
-    <Router>
+    <BrowserRouter>
       <div className={`app ${theme}`}>
         <Routes>
-          <Route path="/login" component={Login} />
-          <Route path="/board">
-            {isLoggedIn ? (
-              boards.length > 0 ? (
-                <>
-                  <Header />
-                  <Board />
-                </>
+          <Route path="/login" element={<Login />} />
+          <Route
+            path="/board"
+            element={
+              isLoggedIn ? (
+                boards.length > 0 ? (
+                  <>
+                    <Header />
+                    <Board />
+                  </>
+                ) : (
+                  <EmptyBoard type="add" />
+                )
               ) : (
-                <EmptyBoard type="add" />
+                <Navigate to="/login" replace />
               )
-            ) : (
-              <Navigate to="/login" />
-            )}
-          </Route>
-          <Navigate to="/login" />
+            }
+          />
+          <Route path="*" element={<Navigate to="/login" replace />} />
         </Routes>
       </div>
-    </Router>
+    </BrowserRouter>
   );
 }
 
