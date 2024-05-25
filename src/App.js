@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Header from './components/Header';
@@ -45,6 +45,26 @@ function App() {
         </Routes>
       </div>
     </BrowserRouter>
+  );
+}
+
+function Login() {
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    // Your login logic here
+    // ...
+
+    // After successful login
+    localStorage.setItem('isLoggedIn', true);
+    navigate('/board');
+  };
+
+  return (
+    <div>
+      {/* Your login form */}
+      <button onClick={handleLogin}>Login</button>
+    </div>
   );
 }
 
