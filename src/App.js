@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Header from "./components/Header";
 import Board from "./components/Board";
@@ -21,7 +21,7 @@ function App() {
   return (
     <Router>
       <div className={`app ${theme}`}>
-        <Switch>
+        <Routes>
           <Route path="/login" component={Login} />
           <Route path="/board">
             {isLoggedIn ? (
@@ -38,7 +38,7 @@ function App() {
             )}
           </Route>
           <Redirect to="/login" />
-        </Switch>
+        </Routes>
       </div>
     </Router>
   );
